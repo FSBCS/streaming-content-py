@@ -25,13 +25,22 @@ class Filestream:
         """
         return self.file.readline()
     
+    def has_next_line(self):
+        """
+        Checks if there is a next line in the file.
+        """
+        pos = self.file.tell()  # Remember the current file position.
+        line = self.file.readline()
+        self.file.seek(pos)  # Restore the file position.
+        return line != ''
+    
     def reset(self):
         """
         Resets the file pointer to the beginning of the file.
         """
         self.file.close()
         self.file = open(self.filename, 'r')
-
+    
     def close(self):
         """
         Closes the file.
